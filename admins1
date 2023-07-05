@@ -1,0 +1,36 @@
+local adminList = {} -- Lista de administradores
+
+-- Função para verificar se o jogador é um admin
+local function isAdmin(player)
+    return adminList[player.Name] or false
+end
+
+-- Adiciona um jogador à lista de administradores
+local function addAdmin(player)
+    adminList[player.Name] = true
+    print(player.Name .. " foi adicionado à lista de administradores!")
+end
+
+-- Remove um jogador da lista de administradores
+local function removeAdmin(player)
+    adminList[player.Name] = nil
+    print(player.Name .. " foi removido da lista de administradores!")
+end
+
+-- Evento acionado quando um jogador entra no jogo
+game.Players.PlayerAdded:Connect(function(player)
+    -- Verifica se o jogador é um admin
+    if isAdmin(player) then
+        print(player.Name .. " é um administrador!")
+    else
+        print(player.Name .. " não é um administrador!")
+    end
+end)
+
+-- Exemplo de como adicionar/remover jogadores como administradores
+
+-- Para adicionar um jogador como administrador, execute a função addAdmin(player) com o jogador como argumento:
+-- addAdmin(game.Players["NomeDoJogador"])
+
+-- Para remover um jogador da lista de administradores, execute a função removeAdmin(player) com o jogador como argumento:
+-- removeAdmin(game.Players["NomeDoJogador"])
