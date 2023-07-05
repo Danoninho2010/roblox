@@ -1,0 +1,26 @@
+-- Lista de jogadores administradores
+local adminList = {
+    ["NomeAdmin1"] = true,
+    ["NomeAdmin2"] = true,
+    -- Adicione mais jogadores administradores aqui se necessário
+}
+
+-- Verifica se o jogador é um administrador
+local function isAdmin(player)
+    return adminList[player.Name] or false
+end
+
+-- Evento acionado quando um jogador toca em um item
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        character.ChildAdded:Connect(function(item)
+            if isAdmin(player) then
+                -- Verifica se o item é uma das armas do Cuphead, HD Admin ou Portal Gun
+                if item.Name == "Armas del Cuphead" or item.Name == "HD Admin" or item.Name == "Portal Gun" then
+                    -- Código para permitir que jogadores administradores usem os itens aqui
+                    print(player.Name .. " é um administrador e pode usar o item: " .. item.Name)
+                end
+            end
+        end)
+    end)
+end)
